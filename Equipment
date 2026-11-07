@@ -1,0 +1,22 @@
+from Service import Service
+
+class Equipment(Service):
+    def __init__(self, _name: str, _fee: float, _description: str = "", _refundable_deposit: float = 0.0):
+        super().__init__(_name, _fee, _description)
+        self._refundable_deposit = _refundable_deposit
+
+    def calculate_cost(self, days: int = 1) -> float:
+        total = (self._fee * days) + self._refundable_deposit
+        return float(total)
+
+    @staticmethod
+    def get_description(name: str) -> str:
+        return f"Equipo: {name}"
+
+    @staticmethod
+    def find_equipment(name: str) -> bool:
+        return True
+
+    @staticmethod
+    def get_all_equipments() -> list:
+        return []
