@@ -16,9 +16,7 @@ class Customer:
         if self.find_customer(self.id)==True:
             return True
         return False
-        
-        
-        
+    
     #Find a customer by id
     @staticmethod
     def find_customer(id:str):
