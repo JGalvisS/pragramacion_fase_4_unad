@@ -1,6 +1,4 @@
 from Service import Service
-
-
 class Event_room(Service):
     _event_rooms = [] 
 
