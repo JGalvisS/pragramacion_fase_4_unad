@@ -2,7 +2,7 @@ from Service import Service
 
 
 class Equipment(Service):
-    _equipments = []  # lista de todos los equipos creados
+    _equipments = []
 
     def __init__(self, _name: str, _fee: float, _description: str = "", _refundable_deposit: float = 0.0):
         super().__init__(_name, _fee, _description)
