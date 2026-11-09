@@ -1,6 +1,4 @@
 from Service import Service
-
-
 class Equipment(Service):
     _equipments = []
 
