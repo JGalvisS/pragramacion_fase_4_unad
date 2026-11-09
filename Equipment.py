@@ -2,7 +2,7 @@ from Service import Service
 
 
 class Equipment(Service):
-    _equipments = []
+    _equipments = []  # lista de todos los equipos creados
 
     def __init__(self, _name: str, _fee: float, _description: str = "", _refundable_deposit: float = 0.0):
         super().__init__(_name, _fee, _description)
@@ -27,4 +27,5 @@ class Equipment(Service):
     @staticmethod
     def get_all_equipments() -> list:
         return list(Equipment._equipments)
+
 
