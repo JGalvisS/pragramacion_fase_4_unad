@@ -1,12 +1,12 @@
 class Service:
-    def __init__(self,_name: str,_fee:float,_description:str):
-        self.name = _name
-        self.fee = _fee
-        self.description = _description
+    def __init__(self, _name: str, _fee: float, _description: str = ""):
+        self._name = _name
+        self._fee = _fee
+        self._description = _description
 
-    def calculate_cost(self, fee: float) -> float:
-        return self.fee * fee
+    def calculate_cost(self, *args, **kwargs) -> float:
+        return float(self._fee)
 
-    @staticmethod
-    def get_description(_name: str) -> str:
-        return f"Description del servicio: {_name}"
+    def get_description(self, name: str = None) -> str:
+        return self._description
+
