@@ -31,3 +31,4 @@ class Event_room(Service):
     def get_all_event_rooms() -> list:
         return list(Event_room._event_rooms)
 
+
