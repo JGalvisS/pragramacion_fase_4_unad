@@ -8,3 +8,4 @@ class Error_Invalid_Client(Exception):
 
 class Service_Not_Available_Exception(Exception):
     pass
+prueba = Exception_customer("Error de cliente")
