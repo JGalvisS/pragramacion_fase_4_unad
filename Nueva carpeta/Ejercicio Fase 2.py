@@ -220,7 +220,7 @@ txt_clave.pack(pady=5)
 tkinter.Button(ventana, text="Login", font=("Times new roman",18), background="#838485", command=login).pack(pady=10) 
 
 lbl_resultado=tkinter.Label(ventana, background="#4682B4")
-lbl_resultado.pack(pady=20)
+lbl_resultado.pack(pady=40)
 
 #El mainloop, permie que la ventana permanezca abierta hasta que el usuario interacture de los contrario, el codigo se lee en milisegundos y se cierra.
 ventana.mainloop()
