@@ -16,3 +16,61 @@ To establish a clear structural blueprint for the team, the object-oriented arch
 
 ---
 
+## Development Structure & Team Contributions
+
+The project was systematically developed and modularized into **5 core blocks** with collaborative contributions from the team members:
+
+* **Block 1 (JGalvisS):**
+  * Implementation of the `Customer` class with strict data encapsulation and input validations.
+  * Creation of the custom exception classes (`Exception_System`, `Error_Invalid_Client`, `Service_Not_Available_Exception`, `Exception_customer`).
+  * Initialization of the `Reservations` class focusing on the constructor and the `create_customer` method.
+
+* **Block 2 (duverjr11-cmyk):**
+  * Development of the abstract base class `Service`.
+  * Implementation of specialized subclasses (`Event_room`, `Equipment`, `Consulting`) incorporating polymorphism, method overriding, and simulated method overloading for cost calculations.
+
+* **Block 3 (AngelloWTFpy):**
+  * Expansion of the `Reservations` class to handle core booking logic.
+  * Implementation of methods for availability validation (`available_validate`), event room reservations (`event_room_reserve`), equipment rentals (`equipment_reserve`), and specialized consulting bookings (`consulting_reserve`).
+
+* **Block 4 (Team Collaboration):**
+  * Development of the remaining reservation functions and management routines.
+  * Formatting internal lists into clean, readable text strings (`pretty print`) for enhanced user experience and clear console outputs.
+
+* **Block 5 (Final Integration & Documentation):**
+  * Development of the `main.py` entry point featuring an interactive, clean console-based user interface with structured inputs.
+  * Comprehensive logging configuration (`sistema_software_fj.log`) tracking system events, warnings, and errors.
+
+---
+
+## Project Structure
+* `main.py`: Application entry point, logging configuration, and simulation of operations.
+* `Customer.py`: Customer management class with strict data encapsulation and validation.
+* `Service.py`: Abstract base class `Service` and specialized subclasses (`Event_room`, `Equipment`, `Consulting`) implementing polymorphism and method overloading.
+* `Reservation.py`: Controller class integrating customers and services with robust `try/except/else/finally` exception blocks and error chaining.
+* `Exception.py`: Custom exception classes inheriting from Python's base `Exception`.
+* `sistema_software_fj.log`: Automatically generated log file tracking system events and errors.
+
+---
+
+## Prerequisites & Requirements
+* Python 3.8 or higher installed on your local machine.
+* No external database engines or complex third-party libraries are required (uses standard Python libraries such as `logging`, `re`, and `datetime`).
+
+---
+
+## How to Run the Project
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/JGalvisS/pragramacion_fase_4_unad.git](https://github.com/JGalvisS/pragramacion_fase_4_unad.git)
+   cd [pragramacion_fase_4_unad]
+
+2. **Execute the application:**
+   Run the main script from your terminal or IDE:
+   ```bash
+   python main.py
+   ```
+
+3. **Check the Logs:**
+   After execution, verify that the `sistema_software_fj.log` file has been automatically created in the root directory.
