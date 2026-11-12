@@ -16,6 +16,13 @@ To establish a clear structural blueprint for the team, the object-oriented arch
 
 ---
 
+## Project Consolidation & Final Delivery
+All individual components, modular scripts, version-controlled features, and execution files have been fully consolidated directly within this GitHub repository. Furthermore, the complete technical development have been consolidated in the next document:
+
+* **Consolidation document:** ([View the Consolidation document .DOC Link Here](https://unadvirtualedu-my.sharepoint.com/:w:/g/personal/jkgalviss_unadvirtual_edu_co/IQDXgr3vUsatQofiY_nWD6gRARwOgkMZAwAv6JM123WXfbo?e=0ByHNq))
+
+---
+
 ## Development Structure & Team Contributions
 
 The project was systematically developed and modularized into **5 core blocks** with collaborative contributions from the team members:
