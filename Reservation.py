@@ -2,7 +2,10 @@ from datetime import date
 import Customer
 import Exception
 import logging
-import re
+import Event_room
+import Equipment
+import Consulting
+
 
 RESERVATIONS=[]
 
@@ -12,7 +15,7 @@ class Reservations:
         self.reservation_id=_reservation_id
         self.customer_id=_customer_id
         self.service_type=_service_type
-        self.start_service=_service_type
+        self.start_service=_start_service
         self.finish_service=_finish_service
         self.duration=_duration
         self.cost=_cost
@@ -43,5 +46,18 @@ class Reservations:
             print(f"Customer with ID {id} created successfully.")
         finally:
             logging.info(f"Finished processing customer creation attempt for ID: {id}.")
+
+    #Created Available_validate
+    @staticmethod
+    def available_validate(id:str, _service_type:str, _start_service:date, _finish_service:date):
+        if not Customer.Customer.find_customer(id):
+            raise Exception.Error_Invalid_Client("The customer ID is not registered")
+        if _start_service > _finish_service:
+            raise Exception.Exception_System("The start date cannot be greater than the finish date")
+        for reservation in RESERVATIONS:
+            if reservation.state == True and reservation.service_type.lower() == _service_type.lower() and  _start_service <= reservation.finish_service and _finish_service >= reservation.start_service:
+                raise Exception.Service_Not_Available("The requested service is not available for the specified dates")
+        return True
+    
             
 #Reservations.create_customer("1023957","Jose Lopez", 3184454525)
