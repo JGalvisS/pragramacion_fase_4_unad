@@ -82,7 +82,27 @@ class Reservations:
         finally:
             logging.info(f"Finished processing reservation attempt for event room {room_name}.")
 
-                
+    @staticmethod
+    def equipment_reserve(id:str, equipment_name:str, _start_service:date, _finish_service:date):
+        try:
+            if not Equipment.Equipment.find_equipment(equipment_name):
+                    raise Exception.Service_Not_Available_Exception(f"The equipment {equipment_name} is not existing")
+            Reservations.available_validate(id, equipment_name, _start_service, _finish_service)
+            days = (_finish_service - _start_service).days + 1
+            equipment = Equipment.Equipment(equipment_name)
+            total_cost = equipment.calculate_cost(days)
+            reservation_id = len(RESERVATIONS) + 1
+            new_reservation = Reservations(reservation_id, id, equipment_name, _start_service, _finish_service, days, total_cost, True)
+            RESERVATIONS.append(new_reservation)
+            logging.info(f"Reservation {reservation_id} for equipment {equipment_name} created successfully.")
+        except (Exception.Error_Invalid_Client, Exception.Service_Not_Available_Exception, Exception.Exception_System) as err:
+            logging.warning(f"Failed to create reservation for equipment {equipment_name}: {err}")
+            print(f"Warning: {err}")
+        else:
+            print(f"Reservation {reservation_id} for equipment {equipment_name} created successfully.")
+        finally:
+            logging.info(f"Finished processing reservation attempt for equipment {equipment_name}.")
+
 
 
 #Reservations.create_customer("1023957","Jose Lopez", 3184454525)
