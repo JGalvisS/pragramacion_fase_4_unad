@@ -58,6 +58,30 @@ class Reservations:
             if reservation.state == True and reservation.service_type.lower() == _service_type.lower() and  _start_service <= reservation.finish_service and _finish_service >= reservation.start_service:
                 raise Exception.Service_Not_Available("The requested service is not available for the specified dates")
         return True
-    
-            
+
+    #Created event_room_reserve
+    @staticmethod
+    def event_room_reserve (id:str, room_name:str, _start_service:date, _finish_service:date, fornature:bool = False, buffet: bool = False):
+        try:
+            if not Event_room.Event_room.find_event_room(room_name):
+                    raise Exception.Service_Not_Available_Exception(f"The event room {room_name} is not existing")
+            Reservations.available_validate(id, room_name, _start_service, _finish_service)
+            days = (_finish_service - _start_service).days + 1
+            room = Event_room.Event_room(room_name)
+            total_cost = room.calculate_cost(fornature, buffet, days)
+            reservation_id = len(RESERVATIONS) + 1
+            new_reservation = Reservations(reservation_id, id, room_name, _start_service, _finish_service, days, total_cost, True)
+            RESERVATIONS.append(new_reservation)
+            logging.info(f"Reservation {reservation_id} for event room {room_name} created successfully.")
+        except (Exception.Error_Invalid_Client, Exception.Service_Not_Available_Exception, Exception.Exception_System) as err:
+            logging.warning(f"Failed to create reservation for event room {room_name}: {err}")
+            print(f"Warning: {err}")
+        else:
+            print(f"Reservation {reservation_id} for event room {room_name} created successfully.")
+        finally:
+            logging.info(f"Finished processing reservation attempt for event room {room_name}.")
+
+                
+
+
 #Reservations.create_customer("1023957","Jose Lopez", 3184454525)
