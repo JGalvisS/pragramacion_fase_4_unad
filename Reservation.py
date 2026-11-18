@@ -3,6 +3,7 @@ import Customer
 import Exception
 import logging
 import Event_room
+import re
 import Equipment
 import Consulting
 
