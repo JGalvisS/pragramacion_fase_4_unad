@@ -82,6 +82,7 @@ class Reservations:
         finally:
             logging.info(f"Finished processing reservation attempt for event room {room_name}.")
 
+    #Created equipment_reserve
     @staticmethod
     def equipment_reserve(id:str, equipment_name:str, _start_service:date, _finish_service:date):
         try:
