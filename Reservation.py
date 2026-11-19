@@ -57,7 +57,7 @@ class Reservations:
             raise Exception.Exception_System("The start date cannot be greater than the finish date")
         for reservation in RESERVATIONS:
             if reservation.state == True and reservation.service_type.lower() == _service_type.lower() and  _start_service <= reservation.finish_service and _finish_service >= reservation.start_service:
-                raise Exception.Service_Not_Available("The requested service is not available for the specified dates")
+                raise Exception.Service_Not_Available_Exception("The requested service is not available for the specified dates")
         return True
 
     #Created event_room_reserve
@@ -115,7 +115,7 @@ class Reservations:
             consulting = Consulting.Consulting(consulting_name)
             total_cost = consulting.calculate_cost(hiring_model, in_site)
             reservation_id = len(RESERVATIONS) + 1
-            new_reservation = Reservations(reservation_id, id, consulting_name, _start_service, _finish_service, days, hiring_model, in_site, total_cost)
+            new_reservation = Reservations(reservation_id, id, consulting_name, _start_service, _finish_service, days, total_cost, True)
             RESERVATIONS.append(new_reservation)
             logging.info(f"Reservation {reservation_id} for consulting service {consulting_name} created successfully.")
         except (Exception.Error_Invalid_Client, Exception.Service_Not_Available_Exception, Exception.Exception_System) as err:
@@ -127,5 +127,17 @@ class Reservations:
             logging.info(f"Finished processing reservation attempt for consulting service {consulting_name}.")
 
 
-
+#Create a new customer
 #Reservations.create_customer("1023957","Jose Lopez", 3184454525)
+
+#Reserve an event room
+#Reservations.event_room_reserve("1023957", "Salón Diamante", date(2026, 11, 20), date(2026, 11, 22), True, False)
+
+#Failed to reserve an event room
+#Reservations.event_room_reserve("1023957", "Salón Diamante", date(2026, 11, 21), date(2026, 11, 23), False, True)
+
+#Reserve equipment
+#Reservations.equipment_reserve("1023957", "Proyector", date(2026, 11, 20), date(2026, 11, 21))
+
+#Reserve consulting service
+#Reservations.consulting_reserve("1023957", "Consultoría tecnológica", date(2026, 11, 25), date(2026, 11, 26), "Por horas", True)
