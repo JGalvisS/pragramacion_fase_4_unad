@@ -7,7 +7,7 @@ import re
 import Equipment
 import Consulting
 
-
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 RESERVATIONS=[]
 
 class Reservations:
@@ -56,7 +56,7 @@ class Reservations:
         if _start_service > _finish_service:
             raise Exception.Exception_System("The start date cannot be greater than the finish date")
         for reservation in RESERVATIONS:
-            if reservation.state == True and reservation.service_type.lower() == _service_type.lower() and  _start_service <= reservation.finish_service and _finish_service >= reservation.start_service:
+            if reservation["state"] == True and reservation["service_type"].lower() == _service_type.lower() and  _start_service <= reservation["finish_service"] and _finish_service >= reservation["start_service"]:
                 raise Exception.Service_Not_Available_Exception("The requested service is not available for the specified dates")
         return True
 
@@ -72,7 +72,7 @@ class Reservations:
             total_cost = room.calculate_cost(fornature, buffet, days)
             reservation_id = len(RESERVATIONS) + 1
             new_reservation = Reservations(reservation_id, id, room_name, _start_service, _finish_service, days, total_cost, True)
-            RESERVATIONS.append(new_reservation)
+            RESERVATIONS.append(new_reservation.__dict__)
             logging.info(f"Reservation {reservation_id} for event room {room_name} created successfully.")
         except (Exception.Error_Invalid_Client, Exception.Service_Not_Available_Exception, Exception.Exception_System) as err:
             logging.warning(f"Failed to create reservation for event room {room_name}: {err}")
@@ -94,7 +94,7 @@ class Reservations:
             total_cost = equipment.calculate_cost(days)
             reservation_id = len(RESERVATIONS) + 1
             new_reservation = Reservations(reservation_id, id, equipment_name, _start_service, _finish_service, days, total_cost, True)
-            RESERVATIONS.append(new_reservation)
+            RESERVATIONS.append(new_reservation.__dict__)
             logging.info(f"Reservation {reservation_id} for equipment {equipment_name} created successfully.")
         except (Exception.Error_Invalid_Client, Exception.Service_Not_Available_Exception, Exception.Exception_System) as err:
             logging.warning(f"Failed to create reservation for equipment {equipment_name}: {err}")
@@ -116,7 +116,7 @@ class Reservations:
             total_cost = consulting.calculate_cost(hiring_model, in_site)
             reservation_id = len(RESERVATIONS) + 1
             new_reservation = Reservations(reservation_id, id, consulting_name, _start_service, _finish_service, days, total_cost, True)
-            RESERVATIONS.append(new_reservation)
+            RESERVATIONS.append(new_reservation.__dict__)
             logging.info(f"Reservation {reservation_id} for consulting service {consulting_name} created successfully.")
         except (Exception.Error_Invalid_Client, Exception.Service_Not_Available_Exception, Exception.Exception_System) as err:
             logging.warning(f"Failed to create reservation for consulting service {consulting_name}: {err}")
