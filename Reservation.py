@@ -104,6 +104,28 @@ class Reservations:
         finally:
             logging.info(f"Finished processing reservation attempt for equipment {equipment_name}.")
 
+    #Created consulting_reserve
+    @staticmethod
+    def consulting_reserve(id:str, consulting_name:str, _start_service:date, _finish_service:date, hiring_model:str, in_site:bool = False):
+        try:
+            if not Consulting.Consulting.find_consulting(consulting_name):
+                    raise Exception.Service_Not_Available_Exception(f"The consulting service {consulting_name} is not existing")
+            Reservations.available_validate(id, consulting_name, _start_service, _finish_service)
+            days = (_finish_service - _start_service).days + 1
+            consulting = Consulting.Consulting(consulting_name)
+            total_cost = consulting.calculate_cost(hiring_model, in_site)
+            reservation_id = len(RESERVATIONS) + 1
+            new_reservation = Reservations(reservation_id, id, consulting_name, _start_service, _finish_service, days, hiring_model, in_site, total_cost)
+            RESERVATIONS.append(new_reservation)
+            logging.info(f"Reservation {reservation_id} for consulting service {consulting_name} created successfully.")
+        except (Exception.Error_Invalid_Client, Exception.Service_Not_Available_Exception, Exception.Exception_System) as err:
+            logging.warning(f"Failed to create reservation for consulting service {consulting_name}: {err}")
+            print(f"Warning: {err}")
+        else:
+            print(f"Reservation {reservation_id} for consulting service {consulting_name} created successfully.")
+        finally:
+            logging.info(f"Finished processing reservation attempt for consulting service {consulting_name}.")
+
 
 
 #Reservations.create_customer("1023957","Jose Lopez", 3184454525)
