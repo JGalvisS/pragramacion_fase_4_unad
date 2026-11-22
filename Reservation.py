@@ -137,6 +137,9 @@ class Reservations:
             if isinstance(item, dict):
                 details = " | ".join([f"{key}: {value}" for key, value in item.items()])
                 text += f"{count}. {details}\n"
+            elif hasattr(item, "__dict__"):
+                details = " | ".join([f"{key}: {value}" for key, value in item.__dict__.items()])
+                text += f"{count}. {details}\n"
             else:
                 text += f"{count}. {item}\n"
             count += 1
@@ -146,12 +149,15 @@ class Reservations:
     @staticmethod
     def get_all_services() -> str:
         try:
-            rooms = Event_room.Event_room.get_all_event_room()
+            rooms = Event_room.Event_room.get_all_event_rooms()
             if hasattr(Equipment.Equipment, "get_all_equipments"):
-                equipments = Equipment.Equipment.get_all_equipments()
+             equipments = Equipment.Equipment.get_all_equipments()
             else:
-                equipments = Equipment.Equipment.gell_all_equipments()
-            consultings = Consulting.Consulting.get_all_consulting()
+             equipos = Equipment.Equipment.gell_all_equipments()
+            if hasattr(Consulting.Consulting, "get_all_consultings"):
+             consultings = Consulting.Consulting.get_all_consultings()
+            else:
+             consultings = Consulting.Consulting.get_all_consulting()
 
             output = "\n========================================\n"
             output += "       AVAILABLE SERVICES LIST\n"
@@ -161,9 +167,9 @@ class Reservations:
             output += Reservations._format_list("CONSULTING SERVICES", consultings)
             output += "========================================\n"
             logging.info("All available services were listed successfully.")
-        except Exception as err:
-            logging.error(f"Error getting all services: {err}")
-            raise Exception.Exception_System("Failed to load the services list.") from err
+        except BaseException as err:
+         logging.error(f"Error getting all services: {err}")
+         raise Exception.Exception_System("Failed to load the services list.") from err
         else:
             return output
         finally:
@@ -318,7 +324,6 @@ class Reservations:
             return msg
         finally:
             logging.info(f"Finished processing cancel_reservation for ID: {reservation_id}.")
-            
 #Create a new customer
 #Reservations.create_customer("1023957","Jose Lopez", 3184454525)
 
