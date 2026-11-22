@@ -338,3 +338,5 @@ class Reservations:
 
 #Reserve consulting service
 #Reservations.consulting_reserve("1023957", "Consultoría tecnológica", date(2026, 11, 25), date(2026, 11, 26), "Por horas", True)
+#Reserve consulting service
+#Reservations.consulting_reserve("1023957", "Consultoría tecnológica", date(2026, 11, 25), date(2026, 11, 26), "Por horas", True)
