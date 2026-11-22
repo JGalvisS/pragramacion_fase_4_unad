@@ -40,7 +40,7 @@ The project was systematically developed and modularized into **5 core blocks** 
   * Expansion of the `Reservations` class to handle core booking logic.
   * Implementation of methods for availability validation (`available_validate`), event room reservations (`event_room_reserve`), equipment rentals (`equipment_reserve`), and specialized consulting bookings (`consulting_reserve`).
 
-* **Block 4 (Team Collaboration):**
+* **Block 4 (ricodaniel):**
   * Development of the remaining reservation functions and management routines.
   * Formatting internal lists into clean, readable text strings (`pretty print`) for enhanced user experience and clear console outputs.
 
