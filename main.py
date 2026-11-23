@@ -39,8 +39,25 @@ while True:
                         print("Invalid phone number. Enter a 10-digit Colombian mobile number (optional +57).")
                 break
             Reservation.Reservations.create_customer(customer_id,customer_name,int(customer_number_phone))
-        print("Discover our services")
-        print(Reservation.Reservations.get_all_services())
+        print("What would you like to do?")
+        while True:
+            action=input((f"""
+                1. Reserve an event room
+                2. Reserve an equipment
+                3. Reserve a consulting
+                4. Cancel a reservation 
+                5. Consulting a reservation
+                6. Discover each our services
+                Mark number of the option that you want to select: """))
+            if action.isdigit():
+                action= int(action)
+                if 1 <= action <= 6:
+                    break
+                else:
+                    print("Invalid option. Please enter a number between 1 and 6")
+            
+        
+        
         break
     except Exception.Exception_System as err:
         logging.error("Error en la aplicación: %s", err)

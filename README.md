@@ -44,7 +44,7 @@ The project was systematically developed and modularized into **5 core blocks** 
   * Development of the remaining reservation functions and management routines.
   * Formatting internal lists into clean, readable text strings (`pretty print`) for enhanced user experience and clear console outputs.
 
-* **Block 5 (Final Integration & Documentation):**
+* **Block 5 (JGalvisS):**
   * Development of the `main.py` entry point featuring an interactive, clean console-based user interface with structured inputs.
   * Comprehensive logging configuration (`sistema_software_fj.log`) tracking system events, warnings, and errors.
 
