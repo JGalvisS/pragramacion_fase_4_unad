@@ -298,7 +298,37 @@ class Reservations:
         finally:
             logging.info(f"Finished processing get_reservation attempt for ID: {reservation_id}.")
 
-   
+   #Created cancel_reservation
+    @staticmethod
+    def cancel_reservation(reservation_id: int) -> str:
+        try:
+            if not isinstance(reservation_id, int) or reservation_id <= 0:
+                raise Exception.Exception_System("The reservation ID must be a positive integer.")
+
+            found_reservation = None
+            for res in RESERVATIONS:
+                if res["reservation_id"] == reservation_id:
+                    found_reservation = res
+                    break
+
+            if not found_reservation:
+                raise Exception.Service_Not_Available_Exception(f"Reservation with ID {reservation_id} does not exist.")
+
+            if not found_reservation["state"]:
+                raise Exception.Exception_System(f"Reservation {reservation_id} is already cancelled.")
+
+            found_reservation["state"] = False
+        except BaseException as err:
+            logging.warning(f"Failed to cancel reservation {reservation_id}: {err}")
+            print(f"Warning: {err}")
+            return f"Warning: {err}"
+        else:
+            msg = f"Reservation {reservation_id} for {found_reservation['service_type']} was cancelled successfully."
+            logging.info(msg)
+            print(msg)
+            return msg
+        finally:
+            logging.info(f"Finished processing cancel_reservation attempt for ID: {reservation_id}.")
 #Create a new customer
 #Reservations.create_customer("1023957","Jose Lopez", 3184454525)
 
