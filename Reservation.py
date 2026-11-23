@@ -6,6 +6,17 @@ import Event_room
 import re
 import Equipment
 import Consulting
+from pathlib import Path
+
+log_file = Path(__file__).resolve().with_name("sistema_software_fj.log")
+handler = logging.FileHandler(log_file, mode="w", encoding="utf-8")
+
+logging.basicConfig(
+    handlers=[handler],
+    level=logging.DEBUG,
+    format="%(asctime)s - %(levelname)s - [%(filename)s:%(lineno)d] - %(message)s",
+    force=True,
+)
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 RESERVATIONS=[]
