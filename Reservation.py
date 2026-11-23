@@ -260,7 +260,43 @@ class Reservations:
         finally:
             logging.info(f"Finished processing get_all_by_service attempt for type: {type}.")
 
-   
+   #Created get_reservation
+    @staticmethod
+    def get_reservation(reservation_id: int) -> str:
+        try:
+            if not isinstance(reservation_id, int) or reservation_id <= 0:
+                raise Exception.Exception_System("The reservation ID must be a positive integer.")
+
+            found_reservation = None
+            for res in RESERVATIONS:
+                if res["reservation_id"] == reservation_id:
+                    found_reservation = res
+                    break
+
+            if not found_reservation:
+                raise Exception.Service_Not_Available_Exception(f"Reservation with ID {reservation_id} was not found.")
+
+            status_str = "Active" if found_reservation["state"] else "Cancelled"
+            info = (
+                f"\n--- RESERVATION DETAILS #{found_reservation['reservation_id']} ---\n"
+                f"Customer ID  : {found_reservation['customer_id']}\n"
+                f"Service      : {found_reservation['service_type']}\n"
+                f"Start Date   : {found_reservation['start_service']}\n"
+                f"Finish Date  : {found_reservation['finish_service']}\n"
+                f"Duration     : {found_reservation['duration']} days\n"
+                f"Total Cost   : ${found_reservation['cost']:,.2f}\n"
+                f"State        : {status_str}\n"
+                f"-----------------------------------\n"
+            )
+        except BaseException as err:
+            logging.warning(f"Failed to get reservation {reservation_id}: {err}")
+            print(f"Warning: {err}")
+            return f"Warning: {err}"
+        else:
+            logging.info(f"Reservation {reservation_id} consulted successfully.")
+            return info
+        finally:
+            logging.info(f"Finished processing get_reservation attempt for ID: {reservation_id}.")
 
    
 #Create a new customer
