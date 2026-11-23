@@ -44,6 +44,19 @@ class Event_room(Service):
     @staticmethod
     def get_all_event_rooms() -> list:
         return [copy.copy(room) for room in Event_room.__event_rooms]
+    
+    @staticmethod
+    def calculate_cost_by_name(event_room: str,fornature: bool = False,buffet: bool = False,days: int = 1) -> float:
+        for room in Event_room.__event_rooms:
+            if room._name.lower() == event_room.lower():
+                days += 1
+                total_cost = room._fee * days
+                if fornature:
+                    total_cost += 500000
+                if buffet:
+                    total_cost += 300000
+                return float(total_cost)
+        raise ValueError(f"El salón '{event_room}' no existe")
 
 
 Event_room._load_initial_data()

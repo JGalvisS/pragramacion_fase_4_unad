@@ -335,6 +335,37 @@ class Reservations:
             return msg
         finally:
             logging.info(f"Finished processing cancel_reservation for ID: {reservation_id}.")
+            
+    def get_descriptions_by_service(service_type: str) -> str:
+        try:
+            if not service_type:
+                raise Exception.Exception_System("Service type and name cannot be empty.")
+            output = f"AVAILABLE {service_type} LIST\n"
+            type = service_type.strip().lower()
+            match type:
+                case "event_room":
+                    rooms = Event_room.Event_room.get_all_event_rooms()
+                    output += Reservations._format_list("EVENT ROOMS", rooms)
+                case "equipment":
+                    equipments = Equipment.Equipment.get_all_equipments()
+                    output += Reservations._format_list("EQUIPMENTS", equipments)
+                case "consulting":
+                    consultings = Consulting.Consulting.get_all_consulting()
+                    output += Reservations._format_list("CONSULTING SERVICES", consultings)
+                    
+            logging.info(f"The  {type} service descriptions were listed successfully.")
+        except BaseException as err:
+            logging.warning(f"Error getting  {type} service descriptions: {err}")
+            raise Exception.Exception_System(f"Failed to load the {type} services descriptions list.") from err
+        else:
+            return output
+        finally:
+            logging.info("Finished processing get_description_by_service request.")
+                    
+                    
+                    
+                    
+                
 #Create a new customer
 #Reservations.create_customer("1023957","Jose Lopez", 3184454525)
 
@@ -349,3 +380,5 @@ class Reservations:
 
 #Reserve consulting service
 #Reservations.consulting_reserve("1023957", "Consultoría tecnológica", date(2026, 11, 25), date(2026, 11, 26), "Por horas", True)
+
+
