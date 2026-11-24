@@ -6,6 +6,7 @@ import Event_room
 import re
 import Equipment
 import Consulting
+from pathlib import Path
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 RESERVATIONS=[]

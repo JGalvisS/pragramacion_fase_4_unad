@@ -1,0 +1,8 @@
+2026-11-23 16:04:40,075 - INFO - [Reservation.py:53] - Customer with ID 123456 created successfully.
+2026-11-23 16:04:40,076 - INFO - [Reservation.py:60] - Finished processing customer creation attempt for ID: 123456.
+2026-11-23 16:04:41,424 - INFO - [Reservation.py:356] - The  event_room service descriptions were listed successfully.
+2026-11-23 16:04:41,424 - INFO - [Reservation.py:363] - Finished processing get_description_by_service request.
+2026-11-23 16:05:22,064 - INFO - [Reservation.py:87] - Reservation 1 for event room salón diamante created successfully.
+2026-11-23 16:05:22,064 - INFO - [Reservation.py:94] - Finished processing reservation attempt for event room salón diamante.
+2026-11-23 16:05:22,065 - INFO - [Reservation.py:297] - Reservation 1 consulted successfully.
+2026-11-23 16:05:22,065 - INFO - [Reservation.py:305] - Finished processing get_reservation for ID: 1.
